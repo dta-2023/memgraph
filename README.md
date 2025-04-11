@@ -529,33 +529,103 @@ These techniques make your graph dynamic and adaptable to real-world business lo
 
 ---
 
-## 5.Practice Exercises Available
+## 5. Practice Exercises
 
-This repository includes a complete set of **hands-on Python exercises** to help you apply the concepts covered in this guide.
-
-📁 You’ll find all exercises in the file: `main.py`  
-📌 They are organized step by step, from simple node creation to a basic fraud detection script.
-
-### 🏃 To run the exercises:
-
-1. Make sure Memgraph is running (via Docker or local install)
-2. Activate your virtual environment
-3. Run the script:
-
-```bash
-python main.py
-```
+> ℹ️ For each exercise, you can rely on the examples and theory presented in **Section 3**.  
+> You are encouraged to draw inspiration from them, but avoid copy-pasting.  
+> Try adapting the structure to new data or contexts.
 
 ---
 
-### 🔄 Reset the graph before each run (optional):
+### Exercise 1 – Creating simple nodes
 
-To wipe the graph data and start fresh before each run, make sure your script includes:
+🎯 **Goal**: Create 3 nodes representing drivers.
+
+- Create three nodes of type `Driver` with properties `name` and `id`.
+- Use a query to check their presence in the database.
+
+**Expected result**: A list containing the 3 created `Driver` nodes.
+
+---
+
+### Exercise 2 – Creating a minimal invoice graph
+
+🛠 **Bonus**: Delete one of the created drivers or invoices using a `DETACH DELETE` query, as shown in the manipulation section.
+
+🎯 **Goal**: Create relationships in a small invoice graph.
+
+- Create two drivers, two invoices, and one bank account.
+- Create the relationships `SENT` and `PAID_INTO` as demonstrated.
+
+**Expected result**: A graph with 5 nodes and 4 relationships.
+
+---
+
+### Exercise 3 – List invoices sent by a driver
+
+🎯 **Goal**: Use a query with `execute_and_fetch()`.
+
+- Retrieve the name of a driver and the list of invoices they sent.
+- Display the pairs `Driver.name` → `Invoice.invoice_id`.
+
+**Expected result**: One line per `SENT` relationship showing both values.
+
+---
+
+### Exercise 4 – Basic fraud detection
+
+🎯 **Goal**: Detect IBANs used by more than one driver.
+
+- Use the analysis code provided in Section 3.
+- Add a new `Driver` node that uses the same IBAN as others.
+
+**Expected result**: An alert listing the IBAN and the names of the drivers involved.
+
+---
+
+### Exercise 5 – Bonus: Create a `detect_fraud()` Python function
+
+🛠 **Bonus**: Add a filter to only return cases where more than **2** drivers use the same IBAN (using `WHERE`).
+
+🎯 **Goal**: Transform the fraud detection logic into a reusable function.
+
+- Create a `detect_fraud()` function that encapsulates the `MATCH`/`RETURN` logic.
+- Return a list of formatted alerts.
+
+**Expected result**: The function can be reused in any Python analysis script.
+
+---
+
+### Exercise 6 – Full node manipulation cycle
+
+🎯 **Goal**: Practice graph operations (read, update, delete).
+
+1. Create a `Driver` node named `"Temp User"` with a unique ID (e.g. `id="TEMP123"`).
+2. Read the node from the database and print its name and ID.
+3. Update the `name` property to `"Temp Updated"`.
+4. Read the node again to verify the update.
+5. Delete the node using `DETACH DELETE`.
+6. Check that it no longer exists in the graph.
+
+**Expected result**:
+
+- The node is created and visible with its initial name.
+- After the update, the name has changed.
+- After deletion, the node no longer appears in results.
+
+---
+
+### ▶️ How to run the exercises
+
+All exercises can be completed inside a single Python file or a Jupyter notebook.  
+It is recommended to start with a clean graph before each run using:
 
 ```python
 memgraph.execute("MATCH (n) DETACH DELETE n")
 ```
+📂 **You can find the full solutions in the file** [`main.py`](./main.py) **at the root of this repository**.
 
----
+💡 **Don't forget to import the necessary libraries** at the top of your file:
 
-Feel free to explore, modify and expand these exercises to fit your use case 🚀
+```python
+from gqlalchemy import Memgraph, create, match
