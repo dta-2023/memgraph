@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memgraph Fraud Detection</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="container mt-5">
+    <div class="text-center">
+      <h2 class="mb-4">Memgraph Fraud Detection</h2>
+    </div>
+
+    <div class="d-flex justify-content-center mb-4">
+      <form action="/generate_csv" method="get">
+        <button type="submit" class="btn btn-secondary">
+          Generate Test CSV
+        </button>
+      </form>
+    </div>
+    <div class="container mt-5">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">Fraud Detection Results</h4>
+        </div>
+        <div class="card-body">
+          {% if fraud_results %}
+          <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>Invoice ID</th>
+                  <th class="text-center">Fraud Prediction</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result in fraud_results %}
+                <tr>
+                  <td>{{ result.invoiceID }}</td>
+                  <td class="text-center">
+                    {% if result.predicted_class == 1 %}
+                    <span class="badge bg-danger p-2">Fraudulent</span>
+                    {% else %}
+                    <span class="badge bg-success p-2">Not Fraudulent</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-center text-muted">No fraud results available.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-4 shadow-sm mx-auto" style="max-width: 400px">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="file" class="form-label">Upload CSV File</label>
+          <input type="file" class="form-control" name="file" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Upload</button>
+      </form>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 mt-5">
+      <div class="col mb-4">
+        <div class="card shadow-sm border-light rounded-3">
+          <div class="card-body">
+            <h5 class="card-title text-dark fw-bold">Node2Vec</h5>
+            <p class="card-text text-muted">
+              Node2Vec is a technique that creates embeddings of nodes in a
+              graph. It helps identify fraudulent patterns in network data.
+            </p>
+            <a
+              href="https://memgraph.com/docs/advanced-algorithms/available-algorithms/node2vec"
+              class="btn btn-outline-primary rounded-pill"
+              target="_blank"
+              >Learn More</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div class="card shadow-sm border-light rounded-3">
+          <div class="card-body">
+            <h5 class="card-title text-dark fw-bold">
+              Node Classification with GNN
+            </h5>
+            <p class="card-text text-muted">
+              Node classification with GNNs is a method where a model learns to
+              categorize nodes in a graph based on their features and
+              connections. It helps in identifying patterns, such as fraudulent
+              nodes, in a network.
+            </p>
+            <a
+              href="https://memgraph.com/docs/advanced-algorithms/available-algorithms/gnn_node_classification"
+              class="btn btn-outline-primary rounded-pill"
+              target="_blank"
+              >Learn More</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
