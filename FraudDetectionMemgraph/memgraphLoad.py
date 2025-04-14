@@ -8,7 +8,7 @@ memgraph.drop_database()
 
 # Load data for Invoices nodes and create the nodes in the graph
 memgraph.execute("""
-LOAD CSV FROM "/memgraph/InvoicesFraud.csv" WITH HEADER AS row
+LOAD CSV FROM "/memgraph/FraudDetectionMemgraph/InvoicesFraud.csv" WITH HEADER AS row
 MERGE (i:Invoice {invoiceID: toInteger(row.invoice_id)})
 ON CREATE SET
     i.invoiceDate = row.invoice_date,
@@ -23,7 +23,7 @@ RETURN i;
 
 # Load data for User nodes and create the nodes in the graph
 memgraph.execute("""
-LOAD CSV FROM "/memgraph/InvoicesFraud.csv" WITH HEADER AS row
+LOAD CSV FROM "/memgraph/FraudDetectionMemgraph/InvoicesFraud.csv" WITH HEADER AS row
 MERGE (u:User {userID: toInteger(row.user_id)})
 ON CREATE SET
     u.id = id(u),
@@ -38,7 +38,7 @@ RETURN u;
 
 # Create relationships between Invoices and Users based on the uploaded invoice data
 memgraph.execute("""
-LOAD CSV FROM "/memgraph/InvoicesFraud.csv" WITH HEADER AS row
+LOAD CSV FROM "/memgraph/FraudDetectionMemgraph/InvoicesFraud.csv" WITH HEADER AS row
 MATCH (i:Invoice {invoiceID: toInteger(row.invoice_id)})
 MATCH (u:User {userID: toInteger(row.user_id)})
 MERGE (i)-[:UPLOADED_BY]->(u)
@@ -47,7 +47,7 @@ RETURN i, u;
 
 # Create relationships between Invoices and Users based on the supplier's TAX ID
 memgraph.execute("""
-LOAD CSV FROM "/memgraph/InvoicesFraud.csv" WITH HEADER AS row
+LOAD CSV FROM "/memgraph/FraudDetectionMemgraph/InvoicesFraud.csv" WITH HEADER AS row
 MATCH (i:Invoice {invoiceID: toInteger(row.invoice_id)})
 WHERE i.supplierTAXID IS NOT NULL
 MATCH (user_to_pay:User {VATNumber: i.supplierTAXID})

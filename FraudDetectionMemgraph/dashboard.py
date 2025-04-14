@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # Setup folders for file upload (host vs. container paths)
 host_upload_folder = './'
-container_upload_folder = '/memgraph'
+container_upload_folder = '/memgraph/FraudDetectionMemgraph'
 os.makedirs(host_upload_folder, exist_ok=True)
 
 # Connect to Memgraph database
