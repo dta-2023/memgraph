@@ -1,194 +1,126 @@
-# Memgraph
+# 🧠 Memgraph – Multi-Part Interactive Guide
 
-- [Memgraph](#memgraph)
-- [Environment Setup](#environment-setup)
-- [Running the Examples](#running-the-examples)
-  - [Fraud Detection with XGBOOST](#fraud-detection-with-xgboost)
-    - [Code Overview](#code-overview)
-    - [Steps to Run the Project](#steps-to-run-the-project)
-      - [Generate Synthetic Data](#generate-synthetic-data)
-    - [Conclusion ](#conclusion)
-  - [Fraud Detection with Memgraph](#fraud-detection-with-memgraph)
-    - [Code Overview](#code-overview-1)
-    - [Steps to run Project](#steps-to-run-project)
-      - [Generate Sample Data](#generate-sample-data)
-      - [Load Data into Memgraph and Train Model](#load-data-into-memgraph-and-train-model)
-      - [Run Web Dashboard](#run-web-dashboard)
-  
+This repository brings together four practical tutorials on using **Memgraph** with Python and graph theory concepts. Each folder represents one part of the project, and contains a dedicated guide and exercises.
 
-# Environment Setup
+---
 
-To run the examples and use Memgraph with the various integrations.
+## 📚 Table of Contents
 
-Follow these steps:
+1. [Cypher and Memgraph Introduction](#1-cypher-and-memgraph-introduction)
+2. [Memgraph Python Guide](#2-memgraph-python-guide)
+3. [Memgraph + Machine Learning](#3-memgraph--machine-learning)
+4. [Full Fraud Detection Project](#4-full-fraud-detection-project)
+5. [Environment Setup](#5-environment-setup)
 
-1. Clone the Repository
-  
-  First, clone this repository to your local machine
-  
-  ```bash
-  git clone https://github.com/dta-2023/memgraph.git
-  ```
+---
 
-2. Create a Virtual Environment with python 3.8 too 3.10 and activate it
-  
-  ```bash
-  python -m venv .venv
-  .venv\Scripts\activate # On Windows
-  # source .venv/bin/activate  # On macOS/Linux
-  ```
-  
-3. Install Dependencies
-  
-  ```bash
-  pip install -r requirements.txt
-  ```
-  
-4. Create & run Docker Memgraph Mage
-  
-  ```bash
-  docker run -p 7687:7687 -p 7444:7444 --name memgraph -v "YOUR\\PATH\\TO\\FOLDER:/memgraph" memgraph/memgraph-mage
-  ```
-  
-5. Create Docker Memgraph Lab
-  
-  ```bash
-  docker run -d -p 3000:3000  --name lab memgraph/lab
-  ```
-  
-  1. **Issues when connecting to Memgraph Lab to Memgraph**
-    
-    1. Remove the Docker Memgraph Lab and run this command
-      
-  
-  ```bash
-  docker run -d -p 3000:3000 -e QUICK_CONNECT_MG_HOST=host.docker.internal --name lab memgraph/lab
-  ```
-  
+## 1. Cypher and Memgraph Introduction
 
-# Running the Examples
+This part introduces the basics of the **Cypher query language** and how it is used with **Memgraph Lab**.  
+You'll learn how to create nodes, relationships, and run queries directly using Cypher syntax.
 
-## Fraud Detection with XGBOOST
+📁 Folder: [`Cypher_and_memgraph_introduction`](./Cypher_and_memgraph_introduction)
 
-This project aims to detect fraudulent invoices using the Memgraph database and a machine learning model. It generates synthetic data, loads it into Memgraph, and trains a model to predict whether an invoice is fraudulent.
+---
 
-### Code Overview
+## 2. Memgraph Python Guide
 
-Here’s an overview of the main files in the project and their purposes:
+This tutorial focuses on using Memgraph with **Python**, via the `gqlalchemy` library.  
+You'll build and query a graph through Python code and understand how to manipulate graph structures programmatically.
 
-| **File** | **Purpose** |
-| --- | --- |
-| `fakedata.py` | Generates fake user and invoice data with fraud labels. |
-| `memgraph.py` | Loads the generated data into Memgraph and creates relationships between users and invoices. |
-| `Traitment.py` | Processes the data and trains a fraud detection model using XGBoost. |
-| `main.py` | Generates new fraudulent invoices using the trained model and adds them to Memgraph and the CSV file. |
+📁 Folder: [`Memgraph_Python_Guide`](./Memgraph_Python_Guide)
 
-### Steps to Run the Project
+---
 
-Dependencies
-Here are the main libraries required to run this project:
+## 3. Memgraph + Machine Learning
 
-gqlalchemy : For interacting with the Memgraph database.
+This part integrates **graph data with machine learning**, using `xgboost`, `scikit-learn`, and more.  
+It simulates fraudulent invoice detection with labeled data, training a predictive model.
 
-xgboost : For training the fraud detection model.
+📁 Folder: [`Memgraph_ML`](./Memgraph_ML)
 
-scikit-learn : For data preprocessing and splitting the data into training and testing sets.
+---
 
-pandas : For data manipulation.
+## 4. Full Fraud Detection Project
 
-Faker : For generating synthetic data.
+This is a complete use case combining **graph database logic** with **interactive visualizations** and **dashboards** using `Flask`.  
+It includes data generation, graph loading, algorithm execution, and results presentation.
 
-joblib : For saving and loading the trained model.
+📁 Folder: [`FraudDetectionMemgraph`](./FraudDetectionMemgraph)
 
-You can install them using pip if necessary:
+---
+
+## 5. Environment Setup
+
+Follow these steps to set up your environment and run any of the four tutorials.
+
+### 🔁 1. Clone the Repository
 
 ```bash
-pip install gqlalchemy xgboost scikit-learn pandas faker joblib
+git clone https://github.com/dta-2023/memgraph.git
+cd memgraph
 ```
 
-#### Generate Synthetic Data
+---
 
-Run the following script to generate fake data for users and invoices with fraud labels:
+### 🐍 2. Create a Virtual Environment (Python 3.8 to 3.10)
 
 ```bash
-python fakedata.py
+python -m venv .venv
 ```
 
-This will create the file invoice_with_fraud2.csv containing synthetic data with embedded fraud patterns.
+#### ✅ Activate it
 
-2. Load Data into Memgraph
-  Run the following script to load the generated data into Memgraph and create relationships between users and invoices:
+- On **Windows**:
 
 ```bash
-python memgraph.py
+.venv\Scripts\activate
 ```
 
-3. Process Data and Train the Fraud Detection Model
-  Run the following script to preprocess the data, train a machine learning model (XGBoost), and save it:
-  
+- On **macOS/Linux**:
 
 ```bash
-python Traitment.py
+source .venv/bin/activate
 ```
 
-This script trains a fraud detection model based on the invoice data.
+---
 
-4. Generate New Fraudulent Invoices
-  Run the following script to generate new fraudulent invoices using the trained model and add them to Memgraph and the CSV file:
+### 📦 3. Install Dependencies
 
 ```bash
-python main.py
+pip install -r requirements.txt
 ```
 
-This script creates new fraudulent invoices, saves them in the CSV file, and adds them to Memgraph.
+---
 
-Access Memgraph
-The project uses Memgraph to store users and invoices. Make sure Memgraph is installed and running on your machine. You can verify connections to Memgraph via Memgraph's management interface or a tool like Cypher.
-
-### Conclusion 
-
-This project allows you to simulate invoice data with fraudulent behaviors, load it into Memgraph, and use a machine learning model to detect fraud. You can extend this project by adding more features like data visualization or integration with other databases.
-
-## Fraud Detection with Memgraph
-
-To see and run the full project, go to the folder: **`FraudDetectionMemgraph`**
-
-### Code Overview
-
-Here’s a quick overview of the main example scripts provided in this project:
-
-| **File** | **Purpose** |
-| --- | --- |
-| `DatasetGenerator.py` | Generates synthetic invoice data with embedded fraud patterns. |
-| `MemgraphLoad.py` | Loads the generated dataset into Memgraph and runs graph algorithms. |
-| `dashboard.py` | Flask-based web dashboard to interact with data and predictions. |
-
-### Steps to run Project
-
-#### Generate Sample Data
+### 🐳 4. Start Memgraph with Docker (Mage Version)
 
 ```bash
-python DatasetGenerator.py
+docker run -p 7687:7687 -p 7444:7444 --name memgraph ^
+-v "YOUR\\PATH\\TO\\FOLDER:/memgraph" memgraph/memgraph-mage
 ```
 
-This will create `InvoicesFraud.csv` with synthetic data containing fraud patterns.
+---
 
-#### Load Data into Memgraph and Train Model
+### 🧪 5. Start Memgraph Lab (GUI)
 
 ```bash
-python MemgraphLoad.py
+docker run -d -p 3000:3000 --name lab memgraph/lab
 ```
 
-#### Run Web Dashboard
+---
+
+### ⚠️ Optional – If Memgraph Lab Doesn’t Connect Properly
 
 ```bash
-python dashboard.py
+docker rm -f lab
+docker run -d -p 3000:3000 -e QUICK_CONNECT_MG_HOST=host.docker.internal --name lab memgraph/lab
 ```
 
-Access the dashboard at `http://127.0.0.1:5000` to:
+---
 
-- Generate new sample data
-  
-- Upload CSV files
-  
-- Get fraud predictions on new invoices
+### ℹ️ Notes
+
+- 🧠 Replace `"YOUR\\PATH\\TO\\FOLDER"` with the path where your files are located.
+- 📍 Memgraph Lab is accessible at [http://localhost:3000](http://localhost:3000)
+- 🧪 Memgraph runs on port `7687` using the **Bolt** protocol.
