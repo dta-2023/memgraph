@@ -1,6 +1,23 @@
-# 1. Introduction
+# 🧠 Memgraph + Python – Interactive Guide
+
+Welcome to this interactive guide on using **Memgraph with Python** via the `gqlalchemy` library.  
+This project demonstrates how to build, query, and manipulate a graph database for real-world use cases like **invoice fraud detection**.
 
 ---
+
+## 📚 Table of Contents
+
+1. [Introduction](#introduction)  
+2. [Setting up Python to use Memgraph with GQLAlchemy](#setting-up-python-to-use-memgraph-with-gqlalchemy)  
+3. [Building and Querying a Graph in Memgraph with Python (gqlalchemy)](#building-and-querying-a-graph-in-memgraph-with-python-gqlalchemy)  
+4. [Working with Graph Data using gqlalchemy](#working-with-graph-data-using-gqlalchemy)  
+5. [Practice Exercises](#practice-exercises)
+
+
+---
+
+# 1. Introduction
+
 
 In this tutorial, you will learn how to interact with a graph database using **Memgraph** and **Python**.  
 The goal is to understand how to model and query data in the form of nodes and relationships, while applying this knowledge to a realistic use case: **fraud detection through invoice analysis**.
