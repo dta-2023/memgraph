@@ -3,8 +3,6 @@
 - [Memgraph](#memgraph)
 - [Environment Setup](#environment-setup)
 - [Running the Examples](#running-the-examples)
-  - [Title - Example 1](#title---example-1)
-  - [Title - Example 2](#title---example-2)
   - [Fraud Detection with XGBOOST](#fraud-detection-with-xgboost)
     - [Code Overview](#code-overview)
     - [Steps to Run the Project](#steps-to-run-the-project)
@@ -69,14 +67,6 @@ Follow these steps:
   
 
 # Running the Examples
-
-## Title - Example 1
-
-TODO
-
-## Title - Example 2
-
-TODO
 
 ## Fraud Detection with XGBOOST
 
