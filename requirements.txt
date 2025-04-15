@@ -1,0 +1,8 @@
+Flask
+gqlalchemy
+Faker
+xgboost
+pandas
+scikit-learn
+joblib
+memgraph
