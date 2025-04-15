@@ -7,11 +7,11 @@ This project demonstrates how to build, query, and manipulate a graph database f
 
 ## 📚 Table of Contents
 
-1. [Introduction](#introduction)  
-2. [Setting up Python to use Memgraph with GQLAlchemy](#setting-up-python-to-use-memgraph-with-gqlalchemy)  
-3. [Building and Querying a Graph in Memgraph with Python (gqlalchemy)](#building-and-querying-a-graph-in-memgraph-with-python-gqlalchemy)  
-4. [Working with Graph Data using gqlalchemy](#working-with-graph-data-using-gqlalchemy)  
-5. [Practice Exercises](#practice-exercises)
+1. [Introduction](#1-introduction)
+2. [Setting up Python to use Memgraph with GQLAlchemy](#2-setting-up-python-to-use-memgraph-with-gqlalchemy)
+3. [Building and Querying a Graph in Memgraph with Python (gqlalchemy)](#3-building-and-querying-a-graph-in-memgraph-with-python-gqlalchemy)
+4. [Working with Graph Data using gqlalchemy](#4-working-with-graph-data-using-gqlalchemy)
+5. [Practice Exercises](#5-practice-exercises)
 
 
 ---
